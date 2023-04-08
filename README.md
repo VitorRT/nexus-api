@@ -175,3 +175,91 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 
 --- 
 
+
+## Editar Business Account ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **nexus/api/v1/business/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    name: "Plusoft",
+    email: "plusoft.contact@gmail.com",
+    cntNumber: "+5511955367753",
+    wppNumber: "+5511955367753"
+}
+```
+
+**Regras de Negócio - Edição de Client**
+
+| Campos    | Editável | Considerações                                    |
+|-----------|----------|--------------------------------------------------|
+| name      | sim      | o nome formal da empresa é editável.             |
+| email     | sim      | o email da empresa é editável.                   |
+| cntNumber | sim      | o numero de contato da empresa é editável.       |
+| wppNumber | sim      | o numero de atendimento do whatsapp é editável.  |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    account_type: "BUSINESS",
+    data_account: {
+      name: "Plusoft",
+      email: "plusoft.contact@gmail.com"
+    },
+    numbers: {
+      cntNumber: "+5511955367753",
+      wppNumber: "+5511955367753"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da conta foram retornados.      |
+|400     | Não existe uma conta com esse ID.        |
+
+
+---
+
+
+## Deletar Business Account 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **nexus/api/v1/business/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "A conta foi desativada com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da conta foram retornados.      |
+|400     | Não existe uma conta com esse ID.        |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
