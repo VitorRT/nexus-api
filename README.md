@@ -263,3 +263,258 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 </br>
 </br>
 </br> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- Business Domain (Incio) -->
+# Business Profile Rest 👨‍💼
+- Criar business profile
+- Detalhar business profile
+- Listar business profiles
+- Editar business profile
+- Desativar business profile
+</br>
+
+## Cadastro de Business Profile 🔨
+
+<!-- Endereço do recurso -->
+`POST` - **nexus/api/v1/business/profile**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    businessId: 1 // FK 
+    bussName: "Plusoft 🧡",
+    bussImg: "plusoft.png",
+    shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências."
+}
+```
+
+| Campo       | Obrigatório | Tipo    | Descrição                                           |
+|-------------|-------------|---------|-----------------------------------------------------|
+| businessId  | sim         | numero  | esse campo é a FK que identifica a empresa.         |
+| bussName    | sim         | texto   | nome informal do perfil da empresa.                 |
+| bussImg     | sim         | texto   | nome da imagem do perfil da empresa com a extenção. |
+| shortDesc   | não         | texto   | uma descriçao curta do perfil da empresa.           |
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_profile: {
+       bussName: "Plusoft 🧡",
+       bussImg: "plusoft.png",
+      shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|201     | o perfil foi criada com sucesso.     |
+|400     | Os dados enviados são inválidos.     |
+
+
+--- 
+
+
+## Detalhar Business Profile 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/business/profile/{id}**
+
+**Exemplo de Resposta**
+
+```js
+
+ {
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_profile: {
+       bussName: "Plusoft 🧡",
+       bussImg: "plusoft.png",
+      shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+ }
+
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|200     | Os dados do perfil foram retornados.   |
+|400     | Não existe um perfil com esse ID.      | 
+
+
+--- 
+
+
+## Listar Business Profile 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/business/profile**
+
+**Exemplo de Resposta** 
+```js
+[
+     {
+        id: 1,
+        business: {
+          businessId: 1,
+          name: "Plusoft"
+        },
+       data_profile: {
+          bussName: "Plusoft 🧡",
+          bussImg: "plusoft.png",
+          shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+        }
+    },
+     {
+        id: 1,
+        business: {
+          businessId: 3,
+          name: "Smash Code!"
+        },
+        data_profile: {
+           bussName: "Smash Code! 🤍💻",
+           bussImg: "smash.png",
+          shortDesc: "Sempere inovando e causando a experiência!",
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+        }
+   },
+]
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados dos perfis foram retornados.    |
+
+
+--- 
+
+
+## Editar Business Profile ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **nexus/api/v1/business/profile/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    bussName: "Plusoft 🧡",
+    bussImg: "plusoft.png",
+    shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências."
+}
+```
+
+**Regras de Negócio - Edição de Client**
+
+| Campos    | Editável | Considerações                                        |
+|-----------|----------|------------------------------------------------------|
+| bussName  | sim      | o nome informal do perfil da empresa é editável.     |
+| bussImg   | sim      | a imagem de perfil da empresa é editável.            |
+| shortDesc | sim      | a descrição curta do perfil da empresa é editável.   |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+  id: 1,
+  business: {
+    businessId: 1,
+    name: "Plusoft"
+  },
+ data_profile: {
+    bussName: "Plusoft 🧡",
+    bussImg: "plusoft.png",
+    shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
+  },
+  timestamps: {
+    createdAt: "2022-12-10T05:47:08.644",
+    updatedAt: "2022-12-10T05:47:08.644"  
+  }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do perfil foram retornados.     |
+|400     | Não existe uma perfil com esse ID.       |
+
+
+---
+
+
+## Deletar Business Profile 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **nexus/api/v1/business/profile/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "O perfil da conta Plusoft foi desativado com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do perfil foram retornados.     |
+|400     | Não existe um perfil com esse ID.        |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
