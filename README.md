@@ -447,7 +447,7 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 }
 ```
 
-**Regras de Negócio - Edição de Client**
+**Regras de Negócio - Edição de Profile**
 
 | Campos    | Editável | Considerações                                        |
 |-----------|----------|------------------------------------------------------|
@@ -506,6 +506,213 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 | Código | Descrição                                |
 |--------|------------------------------------------|
 |200     | Os dados do perfil foram retornados.     |
+|400     | Não existe um perfil com esse ID.        |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- Customer Domain (Incio) -->
+# Customer Data Rest 👨‍💼
+- Criar customer data
+- Detalhar customer data
+- Listar customer datas
+- Editar customer data
+- Desativar customer data
+</br>
+
+## Cadastro de Customer Data 🔨
+
+<!-- Endereço do recurso -->
+`POST` - **nexus/api/v1/business/customer**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    businessId: 1 // FK 
+    cusName: "Paulo Silva",
+    cusEmail: "paulosilvana@gmail.com",
+    cusPhone: "+5511944563385",
+    channelOrigin: "INSTAGRAM"
+}
+```
+
+| Campo         | Obrigatório | Tipo    | Descrição                                           |
+|---------------|-------------|---------|-----------------------------------------------------|
+| businessId    | sim         | numero  | esse campo é a FK que identifica a empresa.         |
+| cusName       | não         | texto   | nome de comunicação do cliente da empresa.          |
+| cusEmail      | não         | texto   | email de comunicação do cliente da empresa.         |
+| cusPhone      | não         | texto   | telefone de comunicação do cliente da empresa.      |
+| channelOrigin | sim         | texto   | canal de comunicação de origem do cliente.          |
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_customer: {
+      cusName: "Paulo Silva",
+      cusEmail: "paulosilvana@gmail.com",
+      cusPhone: "+5511944563385",
+      channelOrigin: "INSTAGRAM"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|201     | o cliente foi criado com sucesso.    |
+|400     | Os dados enviados são inválidos.     |
+
+
+--- 
+
+
+## Detalhar Customer Data 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/business/customer/{id}**
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_customer: {
+      cusName: "Paulo Silva",
+      cusEmail: "paulosilvana@gmail.com",
+      cusPhone: "+5511944563385",
+      channelOrigin: "INSTAGRAM"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|200     | Os dados do cliente foram retornados.  |
+|400     | Não existe um cleinte com esse ID.     | 
+
+
+--- 
+
+
+## Listar Customer Datas 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/business/customer**
+
+**Exemplo de Resposta** 
+```js
+[
+     {
+        id: 1,
+        business: {
+          businessId: 1,
+          name: "Plusoft"
+        },
+        data_customer: {
+          cusName: "Paulo Silva",
+          cusEmail: "paulosilvana@gmail.com",
+          cusPhone: "+5511944563385",
+          channelOrigin: "INSTAGRAM"
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+        }
+    },
+     {
+        id: 2,
+        business: {
+          businessId: 3,
+          name: "Smash Code!"
+        },
+        data_customer: {
+          cusName: "Mirela Cunha",
+          cusEmail: "mihh.cunha@gmail.com",
+          cusPhone: "+5511944563385",
+          channelOrigin: "WHATSAPP"
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+        }
+    },
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados dos clientes foram retornados.  |
+
+
+--- 
+
+
+## Deletar Customer Data 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **nexus/api/v1/business/customer/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "O Cliente da empresa Plusoft foi deletado com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do cliente foram retornados.    |
 |400     | Não existe um perfil com esse ID.        |
 
 
