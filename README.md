@@ -977,3 +977,885 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 </br>
 </br>
 </br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- Chat Domain (Incio) -->
+# Chat Rest 👨‍💼
+- Criar chat
+- Detalhar chat
+- Listar chats
+- Editar chat
+- Desativar chat
+</br>
+
+## Cadastro de Chat 🔨
+ 
+<!-- Endereço do recurso -->
+`POST` - **nexus/api/v1/chat**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    businessId: 1 // FK 
+    chatStatus: "ABERTO",
+    chatImage: "chat_default.png"
+}
+```
+
+
+| Campo           | Obrigatório | Tipo    | Descrição                                     |
+|-----------------|-------------|---------|-----------------------------------------------|
+| businessId      | sim         | numero  | esse campo é a FK que identifica a empresa.   |
+| chatStatus      | sim         | texto   | Situação em que o chat sem encontra.          |
+| chatImage       | sim         | texto   | Nome da imagem do chat com a extensão.        |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_chat: {
+      chatStatus: "ABERTO",
+      chatImage: "chat_default.png"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                        |
+|--------|----------------------------------|
+|201     | o chat foi criada com sucesso.   |
+|400     | Os dados enviados são inválidos. |
+
+
+--- 
+
+
+## Detalhar Chat 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/chat/{id}**
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_chat: {
+      chatStatus: "ABERTO",
+      chatImage: "chat_default.png"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|200     | Os dados do chat foram retornados.   |
+|400     | Não existe um chat com esse ID.      | 
+
+
+--- 
+
+
+## Listar Communcation Channels 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/chat**
+
+**Exemplo de Resposta** 
+```js
+[
+       {
+          id: 1,
+          business: {
+            businessId: 1,
+            name: "Plusoft"
+          },
+          data_chat: {
+            chatStatus: "ABERTO",
+            chatImage: "chat_default.png"
+          },
+          timestamps: {
+            createdAt: "2022-12-10T05:47:08.644",
+            updatedAt: "2022-12-10T05:47:08.644"  
+          }
+      },
+      {
+        id: 1,
+        business: {
+          businessId: 1,
+          name: "Plusoft"
+        },
+        data_chat: {
+          chatStatus: "FECHADO",
+          chatImage: "chat_default.png"
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+      }
+  }
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|200     | Os dados dos chats foram retornados.   |
+
+
+--- 
+
+
+## Editar Chat ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **nexus/api/v1/chat/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    chatStatus: "ABERTO",
+}
+```
+
+**Regras de Negócio - Edição de Profile**
+
+| Campos      | Editável | Considerações                    |
+|-------------|----------|----------------------------------|
+| chatStatus  | sim      | A situação do chat é editável.   |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_chat: {
+      chatStatus: "ABERTO",
+      chatImage: "chat_default.png"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                          |
+|--------|------------------------------------|
+|200     | Os dados do chat foram retornados. |
+|400     | Não existe um chat com esse ID.    |
+
+
+---
+
+
+## Deletar Communcation Channel 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **nexus/api/v1/chat/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "O Chat foi desativado com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do chat foram retornados.       |
+|400     | Não existe um chat com esse ID.          |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- Chat Domain (Incio) -->
+# Dino Bot Rest 👨‍💼
+- Criar um dino bot
+- Ativar dino
+- Desativar dino
+</br>
+
+## Cadastro de um Dino 🔨
+ 
+<!-- Endereço do recurso -->
+`POST` - **nexus/api/v1/dino**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    chatId: 1 // FK 
+    dinoOn: true,
+    dinoItents: "PURCHASE"
+}
+```
+
+
+| Campo           | Obrigatório | Tipo      | Descrição                                     |
+|-----------------|-------------|-----------|-----------------------------------------------|
+| chatId          | sim         | numero    | esse campo é a FK que identifica o chat.      |
+| dinoOn          | sim         | boolean   | flag de ativação do dino bot.                 |
+| dinoItents      | sim         | texto     | intenções do dino bot na conversa.            |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    chat: {
+      chatId: 1
+    },
+    data_profile: {
+      dinoOn: true,
+      dinoItents: "PURCHASE"
+    },
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|201     | o dino foi criado com sucesso.         |
+|400     | Os dados enviados são inválidos.       |
+
+
+--- 
+
+
+## Detalhar Dino 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/dino/{id}**
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    chat: {
+      chatId: 1
+    },
+    data_profile: {
+      dinoOn: true,
+      dinoItents: "PURCHASE"
+    },
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|200     | Os dados do chat foram retornados.     |
+|400     | Não existe um chat com esse ID.        | 
+
+
+--- 
+
+
+## Listar Communcation Channels 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/dino/{id}**
+
+**Exemplo de Resposta** 
+```js
+[
+      {
+          id: 1,
+          chat: {
+            chatId: 1
+          },
+          data_profile: {
+            dinoOn: true,
+            dinoItents: "PURCHASE"
+          },
+          },
+          timestamps: {
+            createdAt: "2022-12-10T05:47:08.644",
+            updatedAt: "2022-12-10T05:47:08.644"  
+          }
+      },
+      {
+        id: 1,
+        chat: {
+          chatId: 3
+        },
+        data_profile: {
+          dinoOn: true,
+          dinoItents: "PURCHASE"
+        },
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+        }
+    }
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|200     | Os dados dos chats foram retornados.   |
+
+
+--- 
+
+
+## Editar Chat ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **nexus/api/v1/dino/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    dinoOn: true,
+    dinoItents: "PURCHASE"
+}
+```
+
+**Regras de Negócio - Edição de Profile**
+
+| Campos      | Editável | Considerações                                  |
+|-------------|----------|------------------------------------------------|
+| dinoOn      | sim      | A flag da ativação do dino é editável.         |
+| dinoItents  | sim      | A intenção do dino é editável.                 |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    chat: {
+      chatId: 1
+    },
+    data_profile: {
+      dinoOn: true,
+      dinoItents: "PURCHASE"
+    },
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|200     | Os dados do chat foram retornados.     |
+|400     | Não existe um chat com esse ID.        | 
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- Chat Domain (Incio) -->
+# Business Message Rest 👨‍💼
+- Criar business message
+- Detalhar business message
+- Listar business messages
+- Desativar business message
+</br>
+
+## Cadastro de Business Message 🔨
+ 
+<!-- Endereço do recurso -->
+`POST` - **nexus/api/v1/business/message**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    businessId: 1, // FK 1
+    chatId: 2, // FK 2
+    msgContent: "Teste de mensagem",
+    msgType: "TEXT"
+}
+```
+
+
+| Campo           | Obrigatório | Tipo    | Descrição                                     |
+|-----------------|-------------|---------|-----------------------------------------------|
+| businessId      | sim         | numero  | esse campo é a FK que identifica a empresa.   |
+| chatId          | sim         | numero  | esse campo é a FK que identifica o chat.      |
+| msgContent      | sim         | texto   | Conteudo da mensagem enviada.                 |
+| msgType         | sim         | texto   | Tipo do conteudo da mensagem enviada.         |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    chat: {
+      chatId: 3,
+    },
+    data_message: {
+      msgContent: "Teste de mensagem",
+      msgType: "TEXT"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                          |
+|--------|------------------------------------|
+|201     | A mensagem foi criada com sucesso. |
+|400     | Os dados enviados são inválidos.   |
+
+
+--- 
+
+
+## Detalhar Business Message 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/business/message/{id}**
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    chat: {
+      chatId: 3,
+    },
+    data_message: {
+      msgContent: "Teste de mensagem",
+      msgType: "TEXT"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da mensagem foram retornados.   |
+|400     | Não existe uma mensagem com esse ID.     | 
+
+
+--- 
+
+
+## Listar Business Messages 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/business/message**
+
+**Exemplo de Resposta** 
+```js
+[
+       {
+          id: 1,
+          business: {
+            businessId: 1,
+            name: "Plusoft"
+          },
+          chat: {
+            chatId: 3,
+          },
+          data_message: {
+            msgContent: "Teste de mensagem",
+            msgType: "TEXT"
+          },
+          timestamps: {
+            createdAt: "2022-12-10T05:47:08.644",
+            updatedAt: "2022-12-10T05:47:08.644"  
+          }
+      },
+      {
+          id: 2,
+          business: {
+            businessId: 1,
+            name: "Plusoft"
+          },
+          chat: {
+            chatId: 3,
+          },
+          data_message: {
+            msgContent: "Olá!",
+            msgType: "TEXT"
+          },
+          timestamps: {
+            createdAt: "2022-12-10T05:47:08.644",
+            updatedAt: "2022-12-10T05:47:08.644"  
+          }
+      }
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                  |
+|--------|--------------------------------------------|
+|200     | Os dados das mensagens foram retornados.   |
+
+
+--- 
+
+
+## Deletar Business Message 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **nexus/api/v1/business/message/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "A mensagem foi desativado com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da mensagem foram retornados.   |
+|400     | Não existe uma mensagem com esse ID.     | 
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- Chat Domain (Incio) -->
+# Customer Message Rest 👨‍💼
+- Criar customer message
+- Detalhar customer message
+- Listar customer messages
+- Desativar customer message
+</br>
+
+## Cadastro de Business Message 🔨
+ 
+<!-- Endereço do recurso -->
+`POST` - **nexus/api/v1/customer/message**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    customerId: 1, // FK 1
+    chatId: 2, // FK 2
+    msgContent: "Teste de mensagem",
+    msgType: "TEXT"
+}
+```
+
+
+| Campo           | Obrigatório | Tipo    | Descrição                                     |
+|-----------------|-------------|---------|-----------------------------------------------|
+| customerId      | sim         | numero  | esse campo é a FK que identifica a empresa.   |
+| chatId          | sim         | numero  | esse campo é a FK que identifica o chat.      |
+| msgContent      | sim         | texto   | Conteudo da mensagem enviada.                 |
+| msgType         | sim         | texto   | Tipo do conteudo da mensagem enviada.         |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    customer: {
+      customerId: 1,
+      name: "Paulo Silva"
+    },
+    chat: {
+      chatId: 3,
+    },
+    data_message: {
+      msgContent: "Teste de mensagem",
+      msgType: "TEXT"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                          |
+|--------|------------------------------------|
+|201     | A mensagem foi criada com sucesso. |
+|400     | Os dados enviados são inválidos.   |
+
+
+--- 
+
+
+## Detalhar Customer Message 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/customer/message/{id}**
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    customer: {
+      customerId: 1,
+      name: "Paulo Silva"
+    },
+    chat: {
+      chatId: 3,
+    },
+    data_message: {
+      msgContent: "Teste de mensagem",
+      msgType: "TEXT"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da mensagem foram retornados.   |
+|400     | Não existe uma mensagem com esse ID.     | 
+
+
+--- 
+
+
+## Listar Customer Messages 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/customer/message**
+
+**Exemplo de Resposta** 
+```js
+[
+       {
+          id: 1,
+          customer: {
+            customerId: 1,
+            name: "Paulo Silva"
+          },
+          chat: {
+            chatId: 3,
+          },
+          data_message: {
+            msgContent: "Teste de mensagem",
+            msgType: "TEXT"
+          },
+          timestamps: {
+            createdAt: "2022-12-10T05:47:08.644",
+            updatedAt: "2022-12-10T05:47:08.644"  
+          }
+      },
+      {
+          id: 2,
+          business: {
+            businessId: 1,
+            name: "Mirela"
+          },
+          chat: {
+            chatId: 3,
+          },
+          data_message: {
+            msgContent: "Olá!",
+            msgType: "TEXT"
+          },
+          timestamps: {
+            createdAt: "2022-12-10T05:47:08.644",
+            updatedAt: "2022-12-10T05:47:08.644"  
+          }
+      }
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                  |
+|--------|--------------------------------------------|
+|200     | Os dados das mensagens foram retornados.   |
+
+
+--- 
+
+
+## Deletar Customer Message 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **nexus/api/v1/customer/message/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "A mensagem foi desativado com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da mensagem foram retornados.   |
+|400     | Não existe uma mensagem com esse ID.     | 
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br>
