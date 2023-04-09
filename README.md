@@ -538,7 +538,6 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 - Criar customer data
 - Detalhar customer data
 - Listar customer datas
-- Editar customer data
 - Desativar customer data
 </br>
 
@@ -725,3 +724,256 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 </br>
 </br>
 </br> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- Communcation Channel Domain (Incio) -->
+# Communcation Channel Rest 👨‍💼
+- Criar communcation channel
+- Detalhar communcation channel
+- Listar communcation channels
+- Editar communcation channel
+- Desativar communcation channel
+</br>
+
+## Cadastro de Communcation Channel 🔨
+ 
+<!-- Endereço do recurso -->
+`POST` - **nexus/api/v1/channel/comunication**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    businessId: 1 // FK 
+    channel: "MENSAGER",
+    numberChannel: "+5511965774398",
+    emailChannel: "foo@gmail.com"
+}
+```
+
+
+| Campo           | Obrigatório | Tipo    | Descrição                                           |
+|-----------------|-------------|---------|-----------------------------------------------------|
+| businessId      | sim         | numero  | esse campo é a FK que identifica a empresa.         |
+| numberChannel   | não         | texto   | numero de comunicação de algum canal digital.       |
+| emailChannel    | não         | texto   | email de comunicação de algum canal digital         |
+
+
+**Exemplo de Resposta**
+
+```js
+{
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_profile: {
+      channel: "MENSAGER",
+      numberChannel: "+5511965774398",
+      emailChannel: "foo@gmail.com"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                              |
+|--------|----------------------------------------|
+|201     | a comunicação foi criada com sucesso.  |
+|400     | Os dados enviados são inválidos.       |
+
+
+--- 
+
+
+## Detalhar Communcation Channel 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/channel/comunication/{id}**
+
+**Exemplo de Resposta**
+
+```js
+ {
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_profile: {
+      channel: "MENSAGER",
+      numberChannel: "+5511965774398",
+      emailChannel: "foo@gmail.com"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-10T05:47:08.644"  
+    }
+}
+```
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                    |
+|--------|----------------------------------------------|
+|200     | Os dados da comunicação foram retornados.    |
+|400     | Não existe um perfil com esse ID.            | 
+
+
+--- 
+
+
+## Listar Communcation Channels 📋
+
+<!-- Endereço do recurso -->
+`GET` - **nexus/api/v1/channel/comunication**
+
+**Exemplo de Resposta** 
+```js
+[
+      {
+        id: 1,
+        business: {
+          businessId: 1,
+          name: "Plusoft"
+        },
+        data_profile: {
+          channel: "MENSAGER",
+          numberChannel: "+5511965774398",
+          emailChannel: "foo@gmail.com"
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+        }
+    },
+      {
+        id: 1,
+        business: {
+          businessId: 1,
+          name: "Plusoft"
+        },
+        data_profile: {
+          channel: "INSTAGRAM",
+          numberChannel: "+5511965774398",
+          emailChannel: "yukari@gmail.com"
+        },
+        timestamps: {
+          createdAt: "2022-12-10T05:47:08.644",
+          updatedAt: "2022-12-10T05:47:08.644"  
+        }
+    },
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                      |
+|--------|------------------------------------------------|
+|200     | Os dados das comnunicações foram retornados.   |
+
+
+--- 
+
+
+## Editar Communcation Channel ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **nexus/api/v1/channel/comunication/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    numberChannel: "+5511965774398",
+    emailChannel: "foo@gmail.com"
+}
+```
+
+**Regras de Negócio - Edição de Profile**
+
+| Campos        | Editável | Considerações                                        |
+|---------------|----------|------------------------------------------------------|
+| numberChannel | sim      | O numero de comunicação do canal é editável.         |
+| emailChannel  | sim      | O email de comunicação do canal é editável.          |
+
+
+**Exemplo de Resposta**
+
+```js
+ {
+    id: 1,
+    business: {
+      businessId: 1,
+      name: "Plusoft"
+    },
+    data_profile: {
+      channel: "MENSAGER",
+      numberChannel: "+5511965774398",
+      emailChannel: "foo@gmail.com"
+    },
+    timestamps: {
+      createdAt: "2022-12-10T05:47:08.644",
+      updatedAt: "2022-12-12T05:47:08.644"  
+    }
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados a comunicação foram retornados. |
+|400     | Não existe uma comunicação com esse ID.  |
+
+
+---
+
+
+## Deletar Communcation Channel 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **nexus/api/v1/business/profile/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "A comunicação do canal INSTAGRAM foi desativada com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados a comunicação foram retornados. |
+|400     | Não existe uma comunicação com esse ID.  |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br>
