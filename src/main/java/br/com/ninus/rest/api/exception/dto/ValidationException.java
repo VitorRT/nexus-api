@@ -1,4 +1,4 @@
-package br.com.ninus.rest.api.exception;
+package br.com.ninus.rest.api.exception.dto;
 
-public record RestValidationError(String field, String message) {
+public record ValidationException(String field, String message) {
 }
