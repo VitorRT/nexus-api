@@ -1,8 +1,6 @@
 package br.com.ninus.rest.api.config;
 
-import br.com.ninus.rest.api.exception.RestException;
-import br.com.ninus.rest.api.exception.RestNotFoundException;
-import br.com.ninus.rest.api.exception.RestValidationException;
+import br.com.ninus.rest.api.exception.*;
 import br.com.ninus.rest.api.exception.dto.ValidationException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,8 +18,16 @@ public class RestExceptionRender {
 
     /* Execption de Validação */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<RestException> MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
-        return ResponseEntity.badRequest().body(new RestException(e.getBody().getStatus(), e.getMessage()));
+    public ResponseEntity<RestValidationException> MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+        List<ValidationException> errors = new ArrayList<>();
+
+        e.getFieldErrors().forEach((v) -> {
+            errors.add(new ValidationException(v.getField(), v.getDefaultMessage()));
+        });
+
+        RestValidationException exception = new RestValidationException(HttpStatus.BAD_REQUEST.value(), errors);
+
+        return ResponseEntity.badRequest().body(exception);
     }
 
     /* Execption de Violação de Integridade dos Dados (Uniques) */
@@ -48,5 +54,15 @@ public class RestExceptionRender {
     @ExceptionHandler(RestNotFoundException.class)
     public ResponseEntity<RestException> RestNotFoundExceptionHandler(RestNotFoundException e) {
         return ResponseEntity.badRequest().body(new RestException(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
+    }
+
+    @ExceptionHandler(IllegalRequestParamException.class)
+    public ResponseEntity<RestException> IllegalRequestParamExceptionHandler(IllegalRequestParamException e)  {
+        return ResponseEntity.badRequest().body(new RestException(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
+    }
+
+    @ExceptionHandler(IllegalRequestException.class)
+    public ResponseEntity<RestException> IllegalRequestExceptionHandler(IllegalRequestException e) {
+        return ResponseEntity.badRequest().body(new RestException(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
     }
 }

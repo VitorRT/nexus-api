@@ -1,0 +1,8 @@
+**/target
+**/docs/
+**/.git
+**/README.md
+**/HELP.md
+**/.vscode
+**/.editorconfig
+**/.idea
