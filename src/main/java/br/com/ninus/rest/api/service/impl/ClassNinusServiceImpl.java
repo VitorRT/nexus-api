@@ -50,6 +50,12 @@ public class ClassNinusServiceImpl implements IClassNinusService {
     }
 
     @Override
+    public PagedModel<EntityModel<ClassNinusDetails>> listingAll(Pageable pageable) {
+        Page<ClassNinusDetails> list = classNinusRepository.findAll(pageable).map(ClassNinusDetails::new);
+        return assembler.toModel(list);
+    }
+
+    @Override
     public ClassNinusDetails insert(ClassNinusPostRequest request) {
         Client client = this.getClient(request.getClientId());
         ClassNinus classNinus = new ClassNinus(request);

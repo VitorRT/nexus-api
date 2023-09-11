@@ -11,6 +11,7 @@ public interface IClassNinusService {
     PagedModel<EntityModel<ClassNinusDetails>> listingAllInProgress(Pageable pageable);
     PagedModel<EntityModel<ClassNinusDetails>>listingAllInFinished(Pageable pageable);
     PagedModel<EntityModel<ClassNinusDetails>> listingAllInFavorite(Pageable pageable);
+    PagedModel<EntityModel<ClassNinusDetails>> listingAll(Pageable pageable);
     ClassNinusDetails show(Long id);
     ClassNinusDetails insert(ClassNinusPostRequest request);
     ClassNinusDetails updateClassNinusName(Long id, String className);

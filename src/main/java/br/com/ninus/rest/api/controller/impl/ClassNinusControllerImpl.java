@@ -1,7 +1,6 @@
 package br.com.ninus.rest.api.controller.impl;
 
 import br.com.ninus.rest.api.controller.IClassNInusController;
-import br.com.ninus.rest.api.entity.ClassNinus;
 import br.com.ninus.rest.api.entity.dto.classNinus.ClassNinusDetails;
 import br.com.ninus.rest.api.entity.dto.classNinus.ClassNinusPostRequest;
 import br.com.ninus.rest.api.service.IClassNinusService;
@@ -10,7 +9,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -37,6 +35,11 @@ public class ClassNinusControllerImpl implements IClassNInusController {
     @GetMapping("/favorite")
     public ResponseEntity<PagedModel<EntityModel<ClassNinusDetails>>> findAllInFavorite(Pageable pageable) {
         return ResponseEntity.ok(classService.listingAllInFavorite(pageable));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<PagedModel<EntityModel<ClassNinusDetails>>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(classService.listingAll(pageable));
     }
 
     @PostMapping

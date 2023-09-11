@@ -18,6 +18,7 @@ public interface IClassNInusController {
     ResponseEntity<PagedModel<EntityModel<ClassNinusDetails>>> findAllInProgress(@PageableDefault(size = 5) Pageable pageable);
     ResponseEntity<PagedModel<EntityModel<ClassNinusDetails>>> findAllInFinished(@PageableDefault(size = 5) Pageable pageable);
     ResponseEntity<PagedModel<EntityModel<ClassNinusDetails>>> findAllInFavorite(@PageableDefault(size = 5) Pageable pageable);
+    ResponseEntity<PagedModel<EntityModel<ClassNinusDetails>>> findAll(@PageableDefault(size = 5) Pageable pageable);
     ResponseEntity<ClassNinusDetails> create(@RequestBody @Valid ClassNinusPostRequest request);
     ResponseEntity<ClassNinusDetails> show(@PathVariable Long id);
     ResponseEntity<ClassNinusDetails> updateClassNinusName(
