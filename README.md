@@ -1,10 +1,10 @@
 # Ninus API 🤍
-### _Solução Oficial da Nexus_
+### _Solução Oficial da Ninus_
 > <small>Todos os direitos reservados para _Smash Code ©_<small/>
 
 
 ## Ninus Rest 💻
-_Documentação Oficial da API Rest do aplicativo Ninus. Com essa API você será capaz de consumir todos os serviços e dados direto do nosso banco de dados. É importante lembrar que essa documentação específica do github abordará apenas os endpoints de acesso a serviços e dados mais importantes da Nexus. <br/> <br/>
+_Documentação Oficial da API Rest do aplicativo Ninus. Com essa API você será capaz de consumir todos os serviços e dados direto do nosso banco de dados. É importante lembrar que essa documentação específica do github abordará apenas os endpoints de acesso a serviços e dados mais importantes da Ninus. <br/> <br/>
 > <small>_Equipe Smash Code! ❤_<small/>
 <hr/>
 </br>
