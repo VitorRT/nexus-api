@@ -1,76 +1,69 @@
-# Nexus API 🤍
+# Ninus API 🤍
 ### _Solução Oficial da Nexus_
-> <small>Todos os direitos reservados para _Nexus ©_<small/>
+> <small>Todos os direitos reservados para _Smash Code ©_<small/>
 
 
-## Nexus Rest 💻
-_Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você será capaz de consumir todos os serviços e dados direto do noss banco de dados. É importante lembrar que essa documentação específica do github abordará apenas os endpoints de acesso a serviços e dados mais importantes da Nexus. Para usufluir da API completa acesse: https://doc.nexus.com/api_ <br/> <br/>
+## Ninus Rest 💻
+_Documentação Oficial da API Rest do aplicativo Ninus. Com essa API você será capaz de consumir todos os serviços e dados direto do nosso banco de dados. É importante lembrar que essa documentação específica do github abordará apenas os endpoints de acesso a serviços e dados mais importantes da Nexus. <br/> <br/>
 > <small>_Equipe Smash Code! ❤_<small/>
 <hr/>
-</br> 
-  
-  
-  
-  
-  
-  
-<!-- Introdução (Inicio) -->
-  
-  
-  
-  
-  
-<!-- Business Domain (Incio) -->
-# Business Rest 👨‍💼
-- Criar business account
-- Detalhar business account
-- Listar business accounts
-- Editar business account
-- Desativar business account
 </br>
 
-## Cadastro de Business Account 🔨
+<!-- Business Domain (Incio) -->
+# Client Rest
+- Criar client account
+- Detalhar client account
+- Listar client accounts
+- Editar client account
+- Desativar client account
+</br>
+
+## Cadastro de Client Account 🔨
 
 <!-- Endereço do recurso -->
 `POST` - **nexus/api/v1/business**
 
-**Exemplo de Entrada** 
+**Exemplo de Entrada** 
 
 ```js
 {
-    name: "Plusoft",
-    email: "plusoft.contact@gmail.com",
-    password: "exemple123",
-    cntNumber: "+5511955367753",
-    wppNumber: "+5511955367753"
+    name: "Paula Vasconcelos",
+    email: "paulinha@gmail.com",
+    password: "Paulinha123",
+    school_type: "CEI_PRIVADO",
 }
 ```
 
-| Campo     | Obrigatório | Tipo  | Descrição                                     |
-|-----------|-------------|-------|-----------------------------------------------|
-| name      | sim         | texto | nome formal da empresa.                       |
-| email     | sim         | texto | email unico profissional da empresa.          |
-| passoword | sim         | texto | senha de identificação da empresa             |
-| cntNumber | sim         | texto | número de contato da empresa                  |
-| wppNumber | sim         | texto | número de atendimento do whatsapp da empresa. |
+| Campo       | Obrigatório | Tipo  | Descrição                                     |
+|-------------|-------------|-------|-----------------------------------------------|
+| name        | sim         | texto | nome do usuário                               |
+| email       | sim         | texto | email unico do usuário                        |
+| passoword   | sim         | texto | senha de identificação do usuário             |
+| school_type | sim         | texto | tipo de escola                                |
 
 **Exemplo de Resposta**
 
 ```js
 {
-    id: 1,
-    account_type: "BUSINESS",
-    data_account: {
-      name: "Plusoft",
-      email: "plusoft.contact@gmail.com"
+    "_embedded": {
+        "clientDetailsList": [
+            {
+                "id": 1,
+                "name": "Paulinha Vasconcelos",
+                "school_type": "CEI_PRIVADO"
+            }
+        ]
     },
-    numbers: {
-      cntNumber: "+5511955367753",
-      wppNumber: "+5511955367753"
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/v1/client?page=0&size=5"
+        }
     },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
+    "page": {
+        "size": 5,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
     }
 }
 ```
@@ -86,28 +79,28 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 --- 
 
 
-## Detalhar Business Account 📋
+## Detalhar Client Account📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business/{id}**
+`GET` - **http://localhost:8080/api/v1/client/{id}**
 
 **Exemplo de Resposta**
 
 ```js
 {
-    id: 1,
-    account_type: "BUSINESS",
-    data_account: {
-      name: "Plusoft",
-      email: "plusoft.contact@gmail.com"
-    },
-    numbers: {
-      cntNumber: "+5511955367753",
-      wppNumber: "+5511955367753"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
+    "id": 1,
+    "name": "Paulinha Vasconcelos",
+    "school_type": "CEI_PRIVADO",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/v1/client/1"
+        },
+        "delete": {
+            "href": "http://localhost:8080/api/v1/client/1"
+        },
+        "all": {
+            "href": "http://localhost:8080/api/v1/client"
+        }
     }
 }
 ```
@@ -124,47 +117,35 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 --- 
 
 
-## Listar Business Accounts 📋
+## Listar Client Account 📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business**
+`GET` - **http://localhost:8080/api/v1/client**
 
-**Exemplo de Resposta** 
+**Exemplo de Resposta** 
 ```js
-[
-    {
-      id: 1,
-      account_type: "BUSINESS",
-      data_account: {
-        name: "Plusoft",
-        email: "plusoft.contact@gmail.com"
-      },
-      numbers: {
-        cntNumber: "+5511955367753",
-        wppNumber: "+5511955367753"
-      },
-      timestamps: {
-        createdAt: "2022-12-10T05:47:08.644",
-        updatedAt: "2022-12-10T05:47:08.644"  
-      }
+{
+    "_embedded": {
+        "clientDetailsList": [
+            {
+                "id": 1,
+                "name": "Paulinha Vasconcelos",
+                "school_type": "CEI_PRIVADO"
+            }
+        ]
     },
-    {
-      id: 2,
-      account_type: "BUSINESS",
-      data_account: {
-        name: "FIAP",
-        email: "contato@fiap.com.br"
-      },
-      numbers: {
-        cntNumber: "+5511955367753",
-        wppNumber: "+5511955367753"
-      },
-      timestamps: {
-        createdAt: "2022-12-10T05:47:08.644",
-        updatedAt: "2022-12-10T05:47:08.644"  
-      }
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/v1/client?page=0&size=5"
+        }
     },
-]
+    "page": {
+        "size": 5,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
+    }
+}
 ```
 ### **Códigos da Resposta**
 
@@ -176,48 +157,35 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 --- 
 
 
-## Editar Business Account ⚙
+## Editar Client Account ⚙
 
 <!-- Endereço do recurso -->
-`PUT` - **nexus/api/v1/business/{id}**
-
-**Campos da Requisição** 
-```js
-{
-    name: "Plusoft",
-    email: "plusoft.contact@gmail.com",
-    cntNumber: "+5511955367753",
-    wppNumber: "+5511955367753"
-}
-```
+`PUT` - **http://localhost:8080/api/v1/client?name=Informacao**
 
 **Regras de Negócio - Edição de Client**
 
 | Campos    | Editável | Considerações                                    |
 |-----------|----------|--------------------------------------------------|
-| name      | sim      | o nome formal da empresa é editável.             |
-| email     | sim      | o email da empresa é editável.                   |
-| cntNumber | sim      | o numero de contato da empresa é editável.       |
-| wppNumber | sim      | o numero de atendimento do whatsapp é editável.  |
+| name      | sim      | o nome do usuário  é editável.                   |
 
 
 **Exemplo de Resposta**
 
 ```js
 {
-    id: 1,
-    account_type: "BUSINESS",
-    data_account: {
-      name: "Plusoft",
-      email: "plusoft.contact@gmail.com"
-    },
-    numbers: {
-      cntNumber: "+5511955367753",
-      wppNumber: "+5511955367753"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
+    "id": 1,
+    "name": "Pedro Luiz",
+    "school_type": "CEI_PRIVADO",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/v1/client/1"
+        },
+        "delete": {
+            "href": "http://localhost:8080/api/v1/client/1"
+        },
+        "all": {
+            "href": "http://localhost:8080/api/v1/client"
+        }
     }
 }
 ```
@@ -233,24 +201,16 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 ---
 
 
-## Deletar Business Account 🗑
+## Deletar Client Account 🗑
 
 <!-- Endereço do recurso -->
-`DELETE` - **nexus/api/v1/business/{id}**
-
-**Exemplo de Resposta** 
-```js
-{
-     status: 204,
-     message: "A conta foi desativada com sucesso!"
-}
-```
+`DELETE` - **http://localhost:8080/api/v1/client/{id}**
 
 ### **Códigos da Resposta**
 
 | Código | Descrição                                |
 |--------|------------------------------------------|
-|200     | Os dados da conta foram retornados.      |
+|200     | Os dados da conta foram excluidos        |
 |400     | Não existe uma conta com esse ID.        |
 
 
@@ -264,327 +224,83 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 </br>
 </br> 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-<!-- Business Domain (Incio) -->
-# Business Profile Rest 👨‍💼
-- Criar business profile
-- Detalhar business profile
-- Listar business profiles
-- Editar business profile
-- Desativar business profile
-</br>
-
-## Cadastro de Business Profile 🔨
-
-<!-- Endereço do recurso -->
-`POST` - **nexus/api/v1/business/profile**
-
-**Exemplo de Entrada** 
-
-```js
-{
-    businessId: 1 // FK 
-    bussName: "Plusoft 🧡",
-    bussImg: "plusoft.png",
-    shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências."
-}
-```
-
-| Campo       | Obrigatório | Tipo    | Descrição                                           |
-|-------------|-------------|---------|-----------------------------------------------------|
-| businessId  | sim         | numero  | esse campo é a FK que identifica a empresa.         |
-| bussName    | sim         | texto   | nome informal do perfil da empresa.                 |
-| bussImg     | sim         | texto   | nome da imagem do perfil da empresa com a extenção. |
-| shortDesc   | não         | texto   | uma descriçao curta do perfil da empresa.           |
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
-    },
-    data_profile: {
-       bussName: "Plusoft 🧡",
-       bussImg: "plusoft.png",
-      shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                            |
-|--------|--------------------------------------|
-|201     | o perfil foi criada com sucesso.     |
-|400     | Os dados enviados são inválidos.     |
-
-
---- 
-
-
-## Detalhar Business Profile 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business/profile/{id}**
-
-**Exemplo de Resposta**
-
-```js
-
- {
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
-    },
-    data_profile: {
-       bussName: "Plusoft 🧡",
-       bussImg: "plusoft.png",
-      shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
- }
-
-```
-
-
-### **Códigos da Resposta**
-
-| Código | Descrição                              |
-|--------|----------------------------------------|
-|200     | Os dados do perfil foram retornados.   |
-|400     | Não existe um perfil com esse ID.      | 
-
-
---- 
-
-
-## Listar Business Profile 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business/profile**
-
-**Exemplo de Resposta** 
-```js
-[
-     {
-        id: 1,
-        business: {
-          businessId: 1,
-          name: "Plusoft"
-        },
-       data_profile: {
-          bussName: "Plusoft 🧡",
-          bussImg: "plusoft.png",
-          shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
-        },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
-        }
-    },
-     {
-        id: 1,
-        business: {
-          businessId: 3,
-          name: "Smash Code!"
-        },
-        data_profile: {
-           bussName: "Smash Code! 🤍💻",
-           bussImg: "smash.png",
-          shortDesc: "Sempere inovando e causando a experiência!",
-        },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
-        }
-   },
-]
-```
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados dos perfis foram retornados.    |
-
-
---- 
-
-
-## Editar Business Profile ⚙
-
-<!-- Endereço do recurso -->
-`PUT` - **nexus/api/v1/business/profile/{id}**
-
-**Campos da Requisição** 
-```js
-{
-    bussName: "Plusoft 🧡",
-    bussImg: "plusoft.png",
-    shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências."
-}
-```
-
-**Regras de Negócio - Edição de Profile**
-
-| Campos    | Editável | Considerações                                        |
-|-----------|----------|------------------------------------------------------|
-| bussName  | sim      | o nome informal do perfil da empresa é editável.     |
-| bussImg   | sim      | a imagem de perfil da empresa é editável.            |
-| shortDesc | sim      | a descrição curta do perfil da empresa é editável.   |
-
-
-**Exemplo de Resposta**
-
-```js
-{
-  id: 1,
-  business: {
-    businessId: 1,
-    name: "Plusoft"
-  },
- data_profile: {
-    bussName: "Plusoft 🧡",
-    bussImg: "plusoft.png",
-    shortDesc: "Trabalhamos diariamente para te ajudar a satisfazer o que mais importa na sua cadeia de valor: as pessoas. Escutamos, discutimos, propomos e caminhamos com você para transformar desafios nas melhores experiências.",
-  },
-  timestamps: {
-    createdAt: "2022-12-10T05:47:08.644",
-    updatedAt: "2022-12-10T05:47:08.644"  
-  }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados do perfil foram retornados.     |
-|400     | Não existe uma perfil com esse ID.       |
-
-
----
-
-
-## Deletar Business Profile 🗑
-
-<!-- Endereço do recurso -->
-`DELETE` - **nexus/api/v1/business/profile/{id}**
-
-**Exemplo de Resposta** 
-```js
-{
-     status: 204,
-     message: "O perfil da conta Plusoft foi desativado com sucesso!"
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados do perfil foram retornados.     |
-|400     | Não existe um perfil com esse ID.        |
-
-
-</br>
-</br>
-</br>
-
----
-
-</br>
-</br>
-</br>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    
 <!-- Customer Domain (Incio) -->
-# Customer Data Rest 👨‍💼
-- Criar customer data
-- Detalhar customer data
-- Listar customer datas
-- Desativar customer data
+# Class 👨‍💼
+- Crie uma Aula
 </br>
 
-## Cadastro de Customer Data 🔨
+## Cadastro de Aula 🔨
 
 <!-- Endereço do recurso -->
-`POST` - **nexus/api/v1/business/customer**
+`POST` - **http://localhost:8080/api/v1/class**
 
-**Exemplo de Entrada** 
+**Exemplo de Entrada** 
 
 ```js
 {
-    businessId: 1 // FK 
-    cusName: "Paulo Silva",
-    cusEmail: "paulosilvana@gmail.com",
-    cusPhone: "+5511944563385",
-    channelOrigin: "INSTAGRAM"
+    "client_id": 1,
+    "class_name": "Convivendo com outras crianças"
 }
 ```
 
-| Campo         | Obrigatório | Tipo    | Descrição                                           |
-|---------------|-------------|---------|-----------------------------------------------------|
-| businessId    | sim         | numero  | esse campo é a FK que identifica a empresa.         |
-| cusName       | não         | texto   | nome de comunicação do cliente da empresa.          |
-| cusEmail      | não         | texto   | email de comunicação do cliente da empresa.         |
-| cusPhone      | não         | texto   | telefone de comunicação do cliente da empresa.      |
-| channelOrigin | sim         | texto   | canal de comunicação de origem do cliente.          |
+| Campo         | Obrigatório | Tipo    | Descrição                                                     |
+|---------------|-------------|---------|---------------------------------------------------------------|
+| client_id     | sim         | numero  | esse campo é a FK que identifica o usuário.                   |
+| businessId    | sim         | numero  | esse campo é o campo que indentifica o nome da classe         |
 
 **Exemplo de Resposta**
 
 ```js
 {
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
+    "id": 1,
+    "client": {
+        "id": 1,
+        "name": "Paulinha Vasconcelos",
+        "school_type": "CEI_PRIVADO"
     },
-    data_customer: {
-      cusName: "Paulo Silva",
-      cusEmail: "paulosilvana@gmail.com",
-      cusPhone: "+5511944563385",
-      channelOrigin: "INSTAGRAM"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
+    "class_name": "Convivendo com outras crianças",
+    "categorie": "PROGRESS",
+    "createdAt": [
+        2023,
+        9,
+        12,
+        16,
+        1,
+        7,
+        322686200
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        16,
+        1,
+        7,
+        322686200
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://localhost:8080/api/v1/class/1"
+        },
+        {
+            "rel": "all-progress",
+            "href": "http://localhost:8080/api/v1/class/progress"
+        },
+        {
+            "rel": "all-finished",
+            "href": "http://localhost:8080/api/v1/class/finished"
+        },
+        {
+            "rel": "all-favorite",
+            "href": "http://localhost:8080/api/v1/class/favorite"
+        }
+    ]
 }
 ```
 
@@ -599,30 +315,63 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 --- 
 
 
-## Detalhar Customer Data 📋
+## Detalhar Aula 📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business/customer/{id}**
+`GET` - **http://localhost/api/v1/business/class/{id}**
 
 **Exemplo de Resposta**
 
 ```js
 {
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
+    "id": 1,
+    "client": {
+        "id": 2,
+        "name": "Paulinha Vasconcelos",
+        "school_type": "CEI_PRIVADO"
     },
-    data_customer: {
-      cusName: "Paulo Silva",
-      cusEmail: "paulosilvana@gmail.com",
-      cusPhone: "+5511944563385",
-      channelOrigin: "INSTAGRAM"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
+    "class_name": "Convivendo com outras crianças",
+    "categorie": "PROGRESS",
+    "createdAt": [
+        2023,
+        9,
+        12,
+        16,
+        54,
+        22,
+        364000000
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        16,
+        54,
+        22,
+        364000000
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://localhost:8080/api/v1/class/1"
+        },
+        {
+            "rel": "all-progress",
+            "href": "http://localhost:8080/api/v1/class/progress"
+        },
+        {
+            "rel": "all-finished",
+            "href": "http://localhost:8080/api/v1/class/finished"
+        },
+        {
+            "rel": "all-favorite",
+            "href": "http://localhost:8080/api/v1/class/favorite"
+        }
+    ]
 }
 
 ```
@@ -639,49 +388,63 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 --- 
 
 
-## Listar Customer Datas 📋
+## Listar Aula 📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business/customer**
+`GET` - **http://localhost:8080/api/v1/class**
 
-**Exemplo de Resposta** 
+**Exemplo de Resposta** 
 ```js
-[
-     {
-        id: 1,
-        business: {
-          businessId: 1,
-          name: "Plusoft"
-        },
-        data_customer: {
-          cusName: "Paulo Silva",
-          cusEmail: "paulosilvana@gmail.com",
-          cusPhone: "+5511944563385",
-          channelOrigin: "INSTAGRAM"
-        },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
-        }
+{
+    "id": 2,
+    "client": {
+        "id": 2,
+        "name": "Paulinha Vasconcelos",
+        "school_type": "CEI_PRIVADO"
     },
-     {
-        id: 2,
-        business: {
-          businessId: 3,
-          name: "Smash Code!"
+    "class_name": "Convivendo com outras crianças",
+    "categorie": "PROGRESS",
+    "createdAt": [
+        2023,
+        9,
+        12,
+        16,
+        55,
+        41,
+        949898500
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        16,
+        55,
+        41,
+        949898500
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/2"
         },
-        data_customer: {
-          cusName: "Mirela Cunha",
-          cusEmail: "mihh.cunha@gmail.com",
-          cusPhone: "+5511944563385",
-          channelOrigin: "WHATSAPP"
+        {
+            "rel": "delete",
+            "href": "http://localhost:8080/api/v1/class/2"
         },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
+        {
+            "rel": "all-progress",
+            "href": "http://localhost:8080/api/v1/class/progress"
+        },
+        {
+            "rel": "all-finished",
+            "href": "http://localhost:8080/api/v1/class/finished"
+        },
+        {
+            "rel": "all-favorite",
+            "href": "http://localhost:8080/api/v1/class/favorite"
         }
-    },
-]
+    ]
+}
 ```
 
 ### **Códigos da Resposta**
@@ -693,17 +456,62 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 
 --- 
 
-
-## Deletar Customer Data 🗑
+## Editar Aula 🗑
 
 <!-- Endereço do recurso -->
-`DELETE` - **nexus/api/v1/business/customer/{id}**
+`PUT` - **http://localhost:8080/api/v1/business/class/1/?className=InformacaoAAlterar**
 
-**Exemplo de Resposta** 
+**Exemplo de Resposta** 
 ```js
 {
-     status: 204,
-     message: "O Cliente da empresa Plusoft foi deletado com sucesso!"
+    "id": 1,
+    "client": {
+        "id": 1,
+        "name": "Pedro Luiz",
+        "school_type": "CEI_PRIVADO"
+    },
+    "class_name": "Alfabetizacao",
+    "categorie": "PROGRESS",
+    "createdAt": [
+        2023,
+        9,
+        12,
+        17,
+        21,
+        33,
+        692287000
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        17,
+        32,
+        47,
+        318355400
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://localhost:8080/api/v1/class/1"
+        },
+        {
+            "rel": "all-progress",
+            "href": "http://localhost:8080/api/v1/class/progress"
+        },
+        {
+            "rel": "all-finished",
+            "href": "http://localhost:8080/api/v1/class/finished"
+        },
+        {
+            "rel": "all-favorite",
+            "href": "http://localhost:8080/api/v1/class/favorite"
+        }
+    ]
 }
 ```
 
@@ -712,6 +520,20 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 | Código | Descrição                                |
 |--------|------------------------------------------|
 |200     | Os dados do cliente foram retornados.    |
+|400     | Não existe um perfil com esse ID.        |
+
+
+## Deletar Aula 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **http://localhost:8080/api/v1/business/class/{id}**
+
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do aula foram excluidos.        |
 |400     | Não existe um perfil com esse ID.        |
 
 
@@ -725,70 +547,102 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 </br>
 </br> 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 <!-- Communcation Channel Domain (Incio) -->
-# Communcation Channel Rest 👨‍💼
-- Criar communcation channel
-- Detalhar communcation channel
-- Listar communcation channels
-- Editar communcation channel
-- Desativar communcation channel
+# Input - Aula - GPT 👨‍💼
+- Criar input 
+- Detalhar input 
+- Listar input 
+- Editar input
 </br>
 
-## Cadastro de Communcation Channel 🔨
+## Cadastro de Input 🔨
  
 <!-- Endereço do recurso -->
-`POST` - **nexus/api/v1/channel/comunication**
+`POST` - **http//:localhost:8080/api/v1/class/input**
 
-**Exemplo de Entrada** 
+**Exemplo de Entrada** 
 
 ```js
 {
-    businessId: 1 // FK 
-    channel: "MENSAGER",
-    numberChannel: "+5511965774398",
-    emailChannel: "foo@gmail.com"
+    "class_ninus_id": 1,
+    "axle": "CONVIVER",
+    "class_room": "Maternal 2",
+    "didatic_resources": "brinquedos e livros.",
+    "type_teaching": "Ensino Infântil",
+    "learning_objective": "CRIANCAS_BEM_PEQUENAS",
+    "class_theme": "Convivência entre as crianças",
+    "class_objective": "Aula que ensine as crianças a conviverem entre si.",
+    "fields_experience": "O eu, o outro e o nós",
+    "duration_in_minutes": 50
 }
 ```
 
 
-| Campo           | Obrigatório | Tipo    | Descrição                                           |
-|-----------------|-------------|---------|-----------------------------------------------------|
-| businessId      | sim         | numero  | esse campo é a FK que identifica a empresa.         |
-| numberChannel   | não         | texto   | numero de comunicação de algum canal digital.       |
-| emailChannel    | não         | texto   | email de comunicação de algum canal digital         |
-
+| Campo              | Obrigatório | Tipo    | Descrição                                           |
+|--------------------|-------------|---------|-----------------------------------------------------|
+| class_ninus_id     | sim         | numero  | esse campo é a FK que identifica a aula.            |
+| axle               | sim         | texto   | temas bem especifico da aula                        |
+| class_room         | sim         | texto   | nome da sala de aula                                |
+| didatic_resources  | sim         | texto   | recursos a serem usados em aula                     |
+| type_teaching      | sim         | texto   | tipo de ensino                                      |
+| learning_objective | sim         | texto   | objetivo didático da aula                           |
+| class_theme        | sim         | texto   | tema principal da aula                              |
+| class_objective    | sim         | texto   | objetivos específicos para cada grupo               |
+| fields_experience  | não         | texto   | campos de experiências                              |
+| duration_in_minutes| sim         | número  | duração total da aula em minutos                    |
 
 **Exemplo de Resposta**
 
 ```js
 {
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
+    "id": 1,
+    "class": {
+        "id": 1,
+        "className": "Convivendo com outras crianças",
+        "categorie": "PROGRESS"
     },
-    data_profile: {
-      channel: "MENSAGER",
-      numberChannel: "+5511965774398",
-      emailChannel: "foo@gmail.com"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
+    "axle": "CONVIVER",
+    "classroom": "Maternal 2",
+    "type_teaching": "Ensino Infântil",
+    "class_theme": "Convivência entre as crianças",
+    "learning_objective": "CRIANCAS_BEM_PEQUENAS",
+    "learning_objective_code": "EI02EO",
+    "age_group": "de 4 anos até 5 anos e 11 meses",
+    "class_objective": "Aula que ensine as crianças a conviverem entre si.",
+    "fields_experience": "O eu, o outro e o nós",
+    "duration_in_minutes": 50,
+    "createdAt": [
+        2023,
+        9,
+        12,
+        16,
+        1,
+        10,
+        611113800
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        16,
+        1,
+        10,
+        611113800
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/input/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://localhost:8080/api/v1/class/input/1"
+        },
+        {
+            "rel": "all",
+            "href": "http://localhost:8080/api/v1/class/input"
+        }
+    ]
 }
 ```
 
@@ -796,36 +650,70 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 
 | Código | Descrição                              |
 |--------|----------------------------------------|
-|201     | a comunicação foi criada com sucesso.  |
+|201     | o input foi criada com sucesso.        |
 |400     | Os dados enviados são inválidos.       |
 
 
 --- 
 
 
-## Detalhar Communcation Channel 📋
+## Detalhar Input 📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/channel/comunication/{id}**
+`GET` - **http://localhost:8080/api/v1/channel/class/input/{id}**
 
 **Exemplo de Resposta**
 
 ```js
- {
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
+{
+    "id": 1,
+    "class": {
+        "id": 1,
+        "className": "Convivendo com outras crianças",
+        "categorie": "PROGRESS"
     },
-    data_profile: {
-      channel: "MENSAGER",
-      numberChannel: "+5511965774398",
-      emailChannel: "foo@gmail.com"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
+    "axle": "CONVIVER",
+    "classroom": "Maternal 2",
+    "type_teaching": "Ensino Infântil",
+    "class_theme": "Convivência entre as crianças",
+    "learning_objective": "CRIANCAS_BEM_PEQUENAS",
+    "learning_objective_code": "EI02EO",
+    "age_group": "de 4 anos até 5 anos e 11 meses",
+    "class_objective": "Aula que ensine as crianças a conviverem entre si.",
+    "fields_experience": "O eu, o outro e o nós",
+    "duration_in_minutes": 50,
+    "createdAt": [
+        2023,
+        9,
+        12,
+        17,
+        1,
+        21,
+        685003000
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        17,
+        1,
+        21,
+        685003000
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/input/1"
+        },
+        {
+            "rel": "delete",
+            "href": "http://localhost:8080/api/v1/class/input/1"
+        },
+        {
+            "rel": "all",
+            "href": "http://localhost:8080/api/v1/class/input"
+        }
+    ]
 }
 ```
 
@@ -841,47 +729,63 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 --- 
 
 
-## Listar Communcation Channels 📋
+## Listar Input 📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/channel/comunication**
+`GET` - **http://localhost:8080/api/v1/channel/class/input**
 
-**Exemplo de Resposta** 
+**Exemplo de Resposta** 
 ```js
-[
-      {
-        id: 1,
-        business: {
-          businessId: 1,
-          name: "Plusoft"
-        },
-        data_profile: {
-          channel: "MENSAGER",
-          numberChannel: "+5511965774398",
-          emailChannel: "foo@gmail.com"
-        },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
-        }
+{
+    "id": 1,
+    "class": {
+        "id": 1,
+        "className": "Convivendo com outras crianças",
+        "categorie": "PROGRESS"
     },
-      {
-        id: 1,
-        business: {
-          businessId: 1,
-          name: "Plusoft"
+    "axle": "CONVIVER",
+    "classroom": "Maternal 2",
+    "type_teaching": "Ensino Infântil",
+    "class_theme": "Convivência entre as crianças",
+    "learning_objective": "CRIANCAS_BEM_PEQUENAS",
+    "learning_objective_code": "EI02EO",
+    "age_group": "de 4 anos até 5 anos e 11 meses",
+    "class_objective": "Aula que ensine as crianças a conviverem entre si.",
+    "fields_experience": "O eu, o outro e o nós",
+    "duration_in_minutes": 50,
+    "createdAt": [
+        2023,
+        9,
+        12,
+        16,
+        1,
+        10,
+        611113800
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        16,
+        1,
+        10,
+        611113800
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/input/1"
         },
-        data_profile: {
-          channel: "INSTAGRAM",
-          numberChannel: "+5511965774398",
-          emailChannel: "yukari@gmail.com"
+        {
+            "rel": "delete",
+            "href": "http://localhost:8080/api/v1/class/input/1"
         },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
+        {
+            "rel": "all",
+            "href": "http://localhost:8080/api/v1/class/input"
         }
-    },
-]
+    ]
+}
 ```
 
 ### **Códigos da Resposta**
@@ -893,78 +797,16 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 
 --- 
 
-
-## Editar Communcation Channel ⚙
+## Deletar Input 🗑
 
 <!-- Endereço do recurso -->
-`PUT` - **nexus/api/v1/channel/comunication/{id}**
-
-**Campos da Requisição** 
-```js
-{
-    numberChannel: "+5511965774398",
-    emailChannel: "foo@gmail.com"
-}
-```
-
-**Regras de Negócio - Edição de Profile**
-
-| Campos        | Editável | Considerações                                        |
-|---------------|----------|------------------------------------------------------|
-| numberChannel | sim      | O numero de comunicação do canal é editável.         |
-| emailChannel  | sim      | O email de comunicação do canal é editável.          |
-
-
-**Exemplo de Resposta**
-
-```js
- {
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
-    },
-    data_profile: {
-      channel: "MENSAGER",
-      numberChannel: "+5511965774398",
-      emailChannel: "foo@gmail.com"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-12T05:47:08.644"  
-    }
-}
-```
+`DELETE` - **http://localhost:8080/api/v1/business/class/input/{id}**
 
 ### **Códigos da Resposta**
 
 | Código | Descrição                                |
 |--------|------------------------------------------|
-|200     | Os dados a comunicação foram retornados. |
-|400     | Não existe uma comunicação com esse ID.  |
-
-
----
-
-
-## Deletar Communcation Channel 🗑
-
-<!-- Endereço do recurso -->
-`DELETE` - **nexus/api/v1/business/profile/{id}**
-
-**Exemplo de Resposta** 
-```js
-{
-     status: 204,
-     message: "A comunicação do canal INSTAGRAM foi desativada com sucesso!"
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados a comunicação foram retornados. |
+|200     | Os dados do input foram excluidos.       |
 |400     | Não existe uma comunicação com esse ID.  |
 
 
@@ -977,105 +819,67 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 </br>
 </br>
 </br>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+   
 <!-- Chat Domain (Incio) -->
-# Chat Rest 👨‍💼
-- Criar chat
-- Detalhar chat
-- Listar chats
-- Editar chat
-- Desativar chat
+# Output 👨‍💼
+- Detalhar output
+- Listar output
+- Desativar 
 </br>
-
-## Cadastro de Chat 🔨
- 
-<!-- Endereço do recurso -->
-`POST` - **nexus/api/v1/chat**
-
-**Exemplo de Entrada** 
-
-```js
-{
-    businessId: 1 // FK 
-    chatStatus: "ABERTO",
-    chatImage: "chat_default.png"
-}
-```
-
-
-| Campo           | Obrigatório | Tipo    | Descrição                                     |
-|-----------------|-------------|---------|-----------------------------------------------|
-| businessId      | sim         | numero  | esse campo é a FK que identifica a empresa.   |
-| chatStatus      | sim         | texto   | Situação em que o chat sem encontra.          |
-| chatImage       | sim         | texto   | Nome da imagem do chat com a extensão.        |
-
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
-    },
-    data_chat: {
-      chatStatus: "ABERTO",
-      chatImage: "chat_default.png"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                        |
-|--------|----------------------------------|
-|201     | o chat foi criada com sucesso.   |
-|400     | Os dados enviados são inválidos. |
-
-
---- 
-
 
 ## Detalhar Chat 📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/chat/{id}**
+`GET` - **http://localhost:8080/api/v1/model**
 
 **Exemplo de Resposta**
 
 ```js
 {
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
+    "id": 1,
+    "model_input": {
+        "id": 1
     },
-    data_chat: {
-      chatStatus: "ABERTO",
-      chatImage: "chat_default.png"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
+    "introduction": "Esta aula tem como objetivo ensinar as crianças a conviverem entre si, abordando o tema 'Conviver'. O tema será trabalhado por meio do eixo 'O eu, o outro e o nós', com duração de 50 minutos.",
+    "learning_objective": "Ao final desta aula, as crianças deverão compreender o conceito de convivência e saber como aplicá-lo em seu dia a dia.",
+    "deployment": "A aula será iniciada com uma conversa sobre o tema, seguida de uma atividade em grupo para que as crianças possam praticar o que foi discutido.",
+    "resources": "Livros didâticos, brinquedos.",
+    "adaptions": "Serão feitas adaptações para que as crianças com necessidades especiais possam participar da aula.",
+    "context_world": "Serão abordados conceitos de convivência, respeito e empatia.",
+    "valuing_culture_diversity": "Serão abordadas as diferenças culturais entre as crianças, valorizando a diversidade.",
+    "games": "Serão realizados jogos para que as crianças possam praticar o que foi discutido.",
+    "family_participation": "Será incentivada a participação dos pais na aula.",
+    "conclusion": "Será realizada uma conversa para que as crianças possam compartilhar o que aprenderam.",
+    "final_remarks": "Serão dadas orientações para que as crianças possam aplicar o que aprenderam em suas vidas.",
+    "goals": "As crianças deverão compreender o conceito de convivência e saber como aplicá-lo em seu dia a dia.",
+    "createdAt": [
+        2023,
+        9,
+        12,
+        17,
+        1,
+        30,
+        847947000
+    ],
+    "updatedAt": [
+        2023,
+        9,
+        12,
+        17,
+        1,
+        30,
+        847947000
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://localhost:8080/api/v1/class/model/1"
+        },
+        {
+            "rel": "all",
+            "href": "http://localhost:8080/api/v1/class/model"
+        }
+    ]
 }
 ```
 
@@ -1084,7 +888,7 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 
 | Código | Descrição                            |
 |--------|--------------------------------------|
-|200     | Os dados do chat foram retornados.   |
+|200     | Os dados do gpt foram retornados.    |
 |400     | Não existe um chat com esse ID.      | 
 
 
@@ -1094,42 +898,83 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 ## Listar Communcation Channels 📋
 
 <!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/chat**
+`GET` - **http://localhost:8080/api/v1/model**
 
-**Exemplo de Resposta** 
+**Exemplo de Resposta** 
 ```js
-[
-       {
-          id: 1,
-          business: {
-            businessId: 1,
-            name: "Plusoft"
-          },
-          data_chat: {
-            chatStatus: "ABERTO",
-            chatImage: "chat_default.png"
-          },
-          timestamps: {
-            createdAt: "2022-12-10T05:47:08.644",
-            updatedAt: "2022-12-10T05:47:08.644"  
-          }
-      },
-      {
-        id: 1,
-        business: {
-          businessId: 1,
-          name: "Plusoft"
-        },
-        data_chat: {
-          chatStatus: "FECHADO",
-          chatImage: "chat_default.png"
-        },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
-      }
-  }
-]
+{
+    "_embedded": {
+        "modelOutputClassDetailsList": [
+            {
+                "id": 1,
+                "model_input": {
+                    "id": 1
+                },
+                "introduction": "Esta aula tem como objetivo ensinar as crianças a conviverem entre si, abordando o tema 'Conviver' por meio do eixo 'O eu, o outro e o nós', com duração de 50 minutos.",
+                "learning_objective": "Ao final desta aula, as crianças deverão compreender o conceito de convivência e saber como aplicá-lo em seu dia a dia.",
+                "deployment": "A aula será iniciada com uma conversa sobre o tema, seguida de uma atividade em grupo para que as crianças possam praticar o que foi discutido.",
+                "resources": "Livros didâticos, brinquedos.",
+                "adaptions": "Serão feitas adaptações para que as crianças com necessidades especiais possam participar da aula.",
+                "context_world": "Serão abordados conceitos de convivência, respeito e empatia.",
+                "valuing_culture_diversity": "Serão abordadas as diferenças culturais entre as crianças, valorizando a diversidade.",
+                "games": "Serão realizados jogos para que as crianças possam praticar o que foi discutido.",
+                "family_participation": "Será incentivada a participação dos pais na aula.",
+                "conclusion": "Será realizada uma conversa para que as crianças possam compartilhar o que aprenderam.",
+                "final_remarks": "Serão dadas orientações para que as crianças possam aplicar o que aprenderam em suas vidas.",
+                "goals": "As crianças deverão compreender o conceito de convivência e saber como aplicá-lo em seu dia a dia.",
+                "createdAt": "2023-09-12T16:01:19.143008",
+                "updatedAt": "2023-09-12T16:01:19.143008",
+                "links": [
+                    {
+                        "href": "http://localhost:8080/api/v1/class/model/1"
+                    },
+                    {
+                        "href": "http://localhost:8080/api/v1/class/model"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "model_input": {
+                    "id": 2
+                },
+                "introduction": "Esta aula tem como objetivo ensinar as crianças a conviverem entre si, abordando o tema 'Conviver' pelo eixo 'O eu, o outro e o nós', com duração de 50 minutos.",
+                "learning_objective": "Ao final desta aula, as crianças deverão compreender o conceito de convivência e saber como aplicá-lo em seu dia a dia.",
+                "deployment": "A aula será iniciada com uma conversa sobre o tema, seguida de uma atividade em grupo para que as crianças possam praticar o que foi discutido.",
+                "resources": "Livros didâticos, brinquedos.",
+                "adaptions": "Serão feitas adaptações para que as crianças com necessidades especiais possam participar da aula.",
+                "context_world": "Serão abordados conceitos de convivência, respeito e empatia.",
+                "valuing_culture_diversity": "Serão abordadas as diferenças culturais entre as crianças, valorizando a diversidade.",
+                "games": "Serão realizados jogos para que as crianças possam praticar o que foi discutido.",
+                "family_participation": "Será incentivada a participação dos pais na aula.",
+                "conclusion": "Será realizada uma conversa para que as crianças possam compartilhar o que aprenderam.",
+                "final_remarks": "Serão dadas orientações para que as crianças possam aplicar o que aprenderam em suas vidas.",
+                "goals": "As crianças deverão compreender o conceito de convivência e saber como aplicá-lo em seu dia a dia.",
+                "createdAt": "2023-09-12T16:28:00.910761",
+                "updatedAt": "2023-09-12T16:28:00.910761",
+                "links": [
+                    {
+                        "href": "http://localhost:8080/api/v1/class/model/2"
+                    },
+                    {
+                        "href": "http://localhost:8080/api/v1/class/model"
+                    }
+                ]
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/v1/class/model?page=0&size=5"
+        }
+    },
+    "page": {
+        "size": 5,
+        "totalElements": 2,
+        "totalPages": 1,
+        "number": 0
+    }
+}
 ```
 
 ### **Códigos da Resposta**
@@ -1141,69 +986,10 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 
 --- 
 
-
-## Editar Chat ⚙
-
-<!-- Endereço do recurso -->
-`PUT` - **nexus/api/v1/chat/{id}**
-
-**Campos da Requisição** 
-```js
-{
-    chatStatus: "ABERTO",
-}
-```
-
-**Regras de Negócio - Edição de Profile**
-
-| Campos      | Editável | Considerações                    |
-|-------------|----------|----------------------------------|
-| chatStatus  | sim      | A situação do chat é editável.   |
-
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
-    },
-    data_chat: {
-      chatStatus: "ABERTO",
-      chatImage: "chat_default.png"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                          |
-|--------|------------------------------------|
-|200     | Os dados do chat foram retornados. |
-|400     | Não existe um chat com esse ID.    |
-
-
----
-
-
-## Deletar Communcation Channel 🗑
+## Deletar Output 🗑
 
 <!-- Endereço do recurso -->
-`DELETE` - **nexus/api/v1/chat/{id}**
-
-**Exemplo de Resposta** 
-```js
-{
-     status: 204,
-     message: "O Chat foi desativado com sucesso!"
-}
-```
+`DELETE` - **http://localhost:8080/api/v1/model/{id}**
 
 ### **Códigos da Resposta**
 
@@ -1211,651 +997,3 @@ _Documentação Oficial da API Rest do aplicativo Nexus. Com essa API você ser�
 |--------|------------------------------------------|
 |200     | Os dados do chat foram retornados.       |
 |400     | Não existe um chat com esse ID.          |
-
-
-</br>
-</br>
-</br>
-
----
-
-</br>
-</br>
-</br>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-<!-- Chat Domain (Incio) -->
-# Dino Bot Rest 👨‍💼
-- Criar um dino bot
-- Ativar dino
-- Desativar dino
-</br>
-
-## Cadastro de um Dino 🔨
- 
-<!-- Endereço do recurso -->
-`POST` - **nexus/api/v1/dino**
-
-**Exemplo de Entrada** 
-
-```js
-{
-    chatId: 1 // FK 
-    dinoOn: true,
-    dinoItents: "PURCHASE"
-}
-```
-
-
-| Campo           | Obrigatório | Tipo      | Descrição                                     |
-|-----------------|-------------|-----------|-----------------------------------------------|
-| chatId          | sim         | numero    | esse campo é a FK que identifica o chat.      |
-| dinoOn          | sim         | boolean   | flag de ativação do dino bot.                 |
-| dinoItents      | sim         | texto     | intenções do dino bot na conversa.            |
-
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    chat: {
-      chatId: 1
-    },
-    data_profile: {
-      dinoOn: true,
-      dinoItents: "PURCHASE"
-    },
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                              |
-|--------|----------------------------------------|
-|201     | o dino foi criado com sucesso.         |
-|400     | Os dados enviados são inválidos.       |
-
-
---- 
-
-
-## Detalhar Dino 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/dino/{id}**
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    chat: {
-      chatId: 1
-    },
-    data_profile: {
-      dinoOn: true,
-      dinoItents: "PURCHASE"
-    },
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-
-### **Códigos da Resposta**
-
-| Código | Descrição                              |
-|--------|----------------------------------------|
-|200     | Os dados do chat foram retornados.     |
-|400     | Não existe um chat com esse ID.        | 
-
-
---- 
-
-
-## Listar Communcation Channels 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/dino/{id}**
-
-**Exemplo de Resposta** 
-```js
-[
-      {
-          id: 1,
-          chat: {
-            chatId: 1
-          },
-          data_profile: {
-            dinoOn: true,
-            dinoItents: "PURCHASE"
-          },
-          },
-          timestamps: {
-            createdAt: "2022-12-10T05:47:08.644",
-            updatedAt: "2022-12-10T05:47:08.644"  
-          }
-      },
-      {
-        id: 1,
-        chat: {
-          chatId: 3
-        },
-        data_profile: {
-          dinoOn: true,
-          dinoItents: "PURCHASE"
-        },
-        },
-        timestamps: {
-          createdAt: "2022-12-10T05:47:08.644",
-          updatedAt: "2022-12-10T05:47:08.644"  
-        }
-    }
-]
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                              |
-|--------|----------------------------------------|
-|200     | Os dados dos chats foram retornados.   |
-
-
---- 
-
-
-## Editar Chat ⚙
-
-<!-- Endereço do recurso -->
-`PUT` - **nexus/api/v1/dino/{id}**
-
-**Campos da Requisição** 
-```js
-{
-    dinoOn: true,
-    dinoItents: "PURCHASE"
-}
-```
-
-**Regras de Negócio - Edição de Profile**
-
-| Campos      | Editável | Considerações                                  |
-|-------------|----------|------------------------------------------------|
-| dinoOn      | sim      | A flag da ativação do dino é editável.         |
-| dinoItents  | sim      | A intenção do dino é editável.                 |
-
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    chat: {
-      chatId: 1
-    },
-    data_profile: {
-      dinoOn: true,
-      dinoItents: "PURCHASE"
-    },
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                              |
-|--------|----------------------------------------|
-|200     | Os dados do chat foram retornados.     |
-|400     | Não existe um chat com esse ID.        | 
-
-
-</br>
-</br>
-</br>
-
----
-
-</br>
-</br>
-</br>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-<!-- Chat Domain (Incio) -->
-# Business Message Rest 👨‍💼
-- Criar business message
-- Detalhar business message
-- Listar business messages
-- Desativar business message
-</br>
-
-## Cadastro de Business Message 🔨
- 
-<!-- Endereço do recurso -->
-`POST` - **nexus/api/v1/business/message**
-
-**Exemplo de Entrada** 
-
-```js
-{
-    businessId: 1, // FK 1
-    chatId: 2, // FK 2
-    msgContent: "Teste de mensagem",
-    msgType: "TEXT"
-}
-```
-
-
-| Campo           | Obrigatório | Tipo    | Descrição                                     |
-|-----------------|-------------|---------|-----------------------------------------------|
-| businessId      | sim         | numero  | esse campo é a FK que identifica a empresa.   |
-| chatId          | sim         | numero  | esse campo é a FK que identifica o chat.      |
-| msgContent      | sim         | texto   | Conteudo da mensagem enviada.                 |
-| msgType         | sim         | texto   | Tipo do conteudo da mensagem enviada.         |
-
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
-    },
-    chat: {
-      chatId: 3,
-    },
-    data_message: {
-      msgContent: "Teste de mensagem",
-      msgType: "TEXT"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                          |
-|--------|------------------------------------|
-|201     | A mensagem foi criada com sucesso. |
-|400     | Os dados enviados são inválidos.   |
-
-
---- 
-
-
-## Detalhar Business Message 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business/message/{id}**
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    business: {
-      businessId: 1,
-      name: "Plusoft"
-    },
-    chat: {
-      chatId: 3,
-    },
-    data_message: {
-      msgContent: "Teste de mensagem",
-      msgType: "TEXT"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados da mensagem foram retornados.   |
-|400     | Não existe uma mensagem com esse ID.     | 
-
-
---- 
-
-
-## Listar Business Messages 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/business/message**
-
-**Exemplo de Resposta** 
-```js
-[
-       {
-          id: 1,
-          business: {
-            businessId: 1,
-            name: "Plusoft"
-          },
-          chat: {
-            chatId: 3,
-          },
-          data_message: {
-            msgContent: "Teste de mensagem",
-            msgType: "TEXT"
-          },
-          timestamps: {
-            createdAt: "2022-12-10T05:47:08.644",
-            updatedAt: "2022-12-10T05:47:08.644"  
-          }
-      },
-      {
-          id: 2,
-          business: {
-            businessId: 1,
-            name: "Plusoft"
-          },
-          chat: {
-            chatId: 3,
-          },
-          data_message: {
-            msgContent: "Olá!",
-            msgType: "TEXT"
-          },
-          timestamps: {
-            createdAt: "2022-12-10T05:47:08.644",
-            updatedAt: "2022-12-10T05:47:08.644"  
-          }
-      }
-]
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                  |
-|--------|--------------------------------------------|
-|200     | Os dados das mensagens foram retornados.   |
-
-
---- 
-
-
-## Deletar Business Message 🗑
-
-<!-- Endereço do recurso -->
-`DELETE` - **nexus/api/v1/business/message/{id}**
-
-**Exemplo de Resposta** 
-```js
-{
-     status: 204,
-     message: "A mensagem foi desativado com sucesso!"
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados da mensagem foram retornados.   |
-|400     | Não existe uma mensagem com esse ID.     | 
-
-
-</br>
-</br>
-</br>
-
----
-
-</br>
-</br>
-</br>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-<!-- Chat Domain (Incio) -->
-# Customer Message Rest 👨‍💼
-- Criar customer message
-- Detalhar customer message
-- Listar customer messages
-- Desativar customer message
-</br>
-
-## Cadastro de Business Message 🔨
- 
-<!-- Endereço do recurso -->
-`POST` - **nexus/api/v1/customer/message**
-
-**Exemplo de Entrada** 
-
-```js
-{
-    customerId: 1, // FK 1
-    chatId: 2, // FK 2
-    msgContent: "Teste de mensagem",
-    msgType: "TEXT"
-}
-```
-
-
-| Campo           | Obrigatório | Tipo    | Descrição                                     |
-|-----------------|-------------|---------|-----------------------------------------------|
-| customerId      | sim         | numero  | esse campo é a FK que identifica a empresa.   |
-| chatId          | sim         | numero  | esse campo é a FK que identifica o chat.      |
-| msgContent      | sim         | texto   | Conteudo da mensagem enviada.                 |
-| msgType         | sim         | texto   | Tipo do conteudo da mensagem enviada.         |
-
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    customer: {
-      customerId: 1,
-      name: "Paulo Silva"
-    },
-    chat: {
-      chatId: 3,
-    },
-    data_message: {
-      msgContent: "Teste de mensagem",
-      msgType: "TEXT"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                          |
-|--------|------------------------------------|
-|201     | A mensagem foi criada com sucesso. |
-|400     | Os dados enviados são inválidos.   |
-
-
---- 
-
-
-## Detalhar Customer Message 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/customer/message/{id}**
-
-**Exemplo de Resposta**
-
-```js
-{
-    id: 1,
-    customer: {
-      customerId: 1,
-      name: "Paulo Silva"
-    },
-    chat: {
-      chatId: 3,
-    },
-    data_message: {
-      msgContent: "Teste de mensagem",
-      msgType: "TEXT"
-    },
-    timestamps: {
-      createdAt: "2022-12-10T05:47:08.644",
-      updatedAt: "2022-12-10T05:47:08.644"  
-    }
-}
-```
-
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados da mensagem foram retornados.   |
-|400     | Não existe uma mensagem com esse ID.     | 
-
-
---- 
-
-
-## Listar Customer Messages 📋
-
-<!-- Endereço do recurso -->
-`GET` - **nexus/api/v1/customer/message**
-
-**Exemplo de Resposta** 
-```js
-[
-       {
-          id: 1,
-          customer: {
-            customerId: 1,
-            name: "Paulo Silva"
-          },
-          chat: {
-            chatId: 3,
-          },
-          data_message: {
-            msgContent: "Teste de mensagem",
-            msgType: "TEXT"
-          },
-          timestamps: {
-            createdAt: "2022-12-10T05:47:08.644",
-            updatedAt: "2022-12-10T05:47:08.644"  
-          }
-      },
-      {
-          id: 2,
-          business: {
-            businessId: 1,
-            name: "Mirela"
-          },
-          chat: {
-            chatId: 3,
-          },
-          data_message: {
-            msgContent: "Olá!",
-            msgType: "TEXT"
-          },
-          timestamps: {
-            createdAt: "2022-12-10T05:47:08.644",
-            updatedAt: "2022-12-10T05:47:08.644"  
-          }
-      }
-]
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                  |
-|--------|--------------------------------------------|
-|200     | Os dados das mensagens foram retornados.   |
-
-
---- 
-
-
-## Deletar Customer Message 🗑
-
-<!-- Endereço do recurso -->
-`DELETE` - **nexus/api/v1/customer/message/{id}**
-
-**Exemplo de Resposta** 
-```js
-{
-     status: 204,
-     message: "A mensagem foi desativado com sucesso!"
-}
-```
-
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados da mensagem foram retornados.   |
-|400     | Não existe uma mensagem com esse ID.     | 
-
-
-</br>
-</br>
-</br>
-
----
-
-</br>
-</br>
-</br>
