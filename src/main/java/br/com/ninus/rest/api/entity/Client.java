@@ -19,7 +19,7 @@ public class Client {
     private Long id;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ClassNinus> classNinuses;
+    private List<ClassNinus> classNinus;
 
     @Column(length = 80, nullable = false)
     private String name;
