@@ -20,8 +20,13 @@ public class FeedClassesControllerImpl implements IFeedClassesController {
         this.service = service;
     }
 
-    @GetMapping("{clientId}")
-    public ResponseEntity<List<FeedClassesResponse>> getFeed(Long clientId) {
-        return ResponseEntity.ok(service.listFeedByClientId(clientId));
+    @GetMapping("/progress/{clientId}")
+    public ResponseEntity<List<FeedClassesResponse>> getFeedInProgress(Long clientId) {
+        return ResponseEntity.ok(service.listFeedInProgessByClientId(clientId));
+    }
+
+    @GetMapping("/finished/{clientId}")
+    public ResponseEntity<List<FeedClassesResponse>> getFeedFinished(Long clientId) {
+        return ResponseEntity.ok(service.listFeedFineshedByClientId(clientId));
     }
 }

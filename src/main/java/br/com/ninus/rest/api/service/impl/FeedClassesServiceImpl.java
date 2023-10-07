@@ -19,9 +19,15 @@ public class FeedClassesServiceImpl implements IFeedClassesService {
     }
 
     @Override
-    public List<FeedClassesResponse> listFeedByClientId(Long clientId) {
+    public List<FeedClassesResponse> listFeedInProgessByClientId(Long clientId) {
         var client = getClientById(clientId);
-        return clientRepository.getFeedClassesByClientId(client.getId());
+        return clientRepository.getFeedClassesInProgressByClientId(client.getId());
+    }
+
+    @Override
+    public List<FeedClassesResponse> listFeedFineshedByClientId(Long clientId) {
+        var client = getClientById(clientId);
+        return clientRepository.getFeedClassesFineshedByClientId(client.getId());
     }
 
     private Client getClientById(Long id) {

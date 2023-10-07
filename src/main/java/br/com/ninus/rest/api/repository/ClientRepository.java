@@ -24,7 +24,24 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
                     "INNER JOIN client.classNinus classNinus " +
                     "INNER JOIN client.classNinus.modelInputClass input " +
                     "INNER JOIN client.classNinus.modelInputClass.modelOutputClass output " +
-                    "WHERE client.id = :clientId"
+                    "WHERE client.id = :clientId and " +
+                    "classNinus.categorie = 'PROGRESS'"
     )
-    List<FeedClassesResponse> getFeedClassesByClientId(@Param(value = "clientId") Long id);
+    List<FeedClassesResponse> getFeedClassesInProgressByClientId(@Param(value = "clientId") Long id);
+
+    @Query(
+            "SELECT NEW br.com.ninus.rest.api.entity.dto.feed.FeedClassesResponse(" +
+                    "client.id AS clientId, " +
+                    "classNinus.id AS classId, " +
+                    "classNinus.className AS className, " +
+                    "output.introduction AS introduction" +
+                    ") " +
+                    "FROM Client client " +
+                    "INNER JOIN client.classNinus classNinus " +
+                    "INNER JOIN client.classNinus.modelInputClass input " +
+                    "INNER JOIN client.classNinus.modelInputClass.modelOutputClass output " +
+                    "WHERE client.id = :clientId and " +
+                    "classNinus.categorie = 'FINISHED'"
+    )
+    List<FeedClassesResponse> getFeedClassesFineshedByClientId(@Param(value = "clientId") Long id);
 }
