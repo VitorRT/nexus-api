@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -19,7 +20,7 @@ public class Client {
     private Long id;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ClassNinus> classNinus;
+    private Set<ClassNinus> classNinus;
 
     @Column(length = 80, nullable = false)
     private String name;

@@ -9,6 +9,7 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import lombok.EqualsAndHashCode;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -16,6 +17,7 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 @Entity
 @Table(name = "class")
 @Data
+@EqualsAndHashCode(of = {"id"})
 public class ClassNinus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

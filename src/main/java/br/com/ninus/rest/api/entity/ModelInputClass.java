@@ -7,6 +7,7 @@ import br.com.ninus.rest.api.utils.constants.LearningObjective;
 import br.com.ninus.rest.api.utils.constants.LearningObjectiveCode;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "model_input")
 @Data
+@EqualsAndHashCode(of = {"id"})
 public class ModelInputClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

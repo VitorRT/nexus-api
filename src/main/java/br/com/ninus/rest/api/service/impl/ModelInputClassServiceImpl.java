@@ -4,6 +4,7 @@ import br.com.ninus.rest.api.entity.ClassNinus;
 import br.com.ninus.rest.api.entity.ModelInputClass;
 import br.com.ninus.rest.api.entity.dto.modelInputClass.ModelInputClassDetails;
 import br.com.ninus.rest.api.entity.dto.modelInputClass.ModelInputClassPostRequest;
+import br.com.ninus.rest.api.exception.InputModelAlreadyExistsException;
 import br.com.ninus.rest.api.exception.RestNotFoundException;
 import br.com.ninus.rest.api.repository.ClassNinusRepository;
 import br.com.ninus.rest.api.repository.ModelInputClassRepository;
@@ -20,6 +21,7 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +41,7 @@ public class ModelInputClassServiceImpl implements IModelInputClassService {
     @Override
     public ModelInputClassDetails insert(ModelInputClassPostRequest request) {
         ClassNinus classNinus = getClassNinus(request.getClassNinusId());
+        verifyInputExistsByClassNinusId(classNinus.getId());
         ModelInputClass input = new ModelInputClass(request);
 
         /*
@@ -98,7 +101,13 @@ public class ModelInputClassServiceImpl implements IModelInputClassService {
         modelInputClassRepository.delete(input);
     }
 
-
+    private boolean verifyInputExistsByClassNinusId(Long classNinusId) {
+        Optional<ModelInputClass> optional = modelInputClassRepository.findInputModelByClassNinusId(classNinusId);
+        if(optional.isPresent()) {
+            throw new InputModelAlreadyExistsException("A aula já possui um modelo de input.");
+        }
+        return false;
+    }
     private ModelInputClass getModelInput(Long id) {
         return modelInputClassRepository.findById(id).orElseThrow(
                 () -> new RestNotFoundException("Nenhum input de aula com o id [ " + id + " ] foi encontrado."));
