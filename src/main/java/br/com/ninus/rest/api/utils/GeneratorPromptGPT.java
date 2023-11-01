@@ -1,7 +1,6 @@
 package br.com.ninus.rest.api.utils;
 
 import br.com.ninus.rest.api.entity.ModelInputClass;
-import br.com.ninus.rest.api.entity.dto.modelInputClass.ModelInputClassDetails;
 
 public abstract class GeneratorPromptGPT {
     public static String createPrompt(ModelInputClass input) {

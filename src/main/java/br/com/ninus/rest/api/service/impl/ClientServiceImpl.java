@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ public class ClientServiceImpl implements IClientService {
 
     private final ClientRepository clientRepository;
     private final PagedResourcesAssembler<ClientDetails> assembler;
+    private final PasswordEncoder encoder;
 
 
     @Override
@@ -39,7 +41,10 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public ClientDetails insert(ClientPostRequest client) {
-        return new ClientDetails(clientRepository.saveAndFlush(new Client(client)));
+        var entity = new Client(client);
+        entity.setPassword(encoder.encode(client.password));
+        System.out.println("Cadastrado com sucesso!");
+        return new ClientDetails(clientRepository.saveAndFlush(entity));
     }
 
     @Override

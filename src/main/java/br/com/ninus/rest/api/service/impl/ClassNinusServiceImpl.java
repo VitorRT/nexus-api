@@ -9,7 +9,6 @@ import br.com.ninus.rest.api.exception.RestNotFoundException;
 import br.com.ninus.rest.api.repository.ClassNinusRepository;
 import br.com.ninus.rest.api.repository.ClientRepository;
 import br.com.ninus.rest.api.service.IClassNinusService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;

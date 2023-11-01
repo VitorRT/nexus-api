@@ -1,6 +1,5 @@
 package br.com.ninus.rest.api.entity.dto.feed;
 
-import br.com.ninus.rest.api.entity.dto.classNinus.ClassNinusDetailsRelation;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;

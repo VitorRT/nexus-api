@@ -3,8 +3,6 @@ package br.com.ninus.rest.api.controller;
 import br.com.ninus.rest.api.entity.dto.classNinus.ClassNinusDetails;
 import br.com.ninus.rest.api.entity.dto.classNinus.ClassNinusPostRequest;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.EntityModel;

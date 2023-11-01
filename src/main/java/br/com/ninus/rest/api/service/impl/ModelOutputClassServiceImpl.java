@@ -2,7 +2,6 @@ package br.com.ninus.rest.api.service.impl;
 
 import br.com.ninus.rest.api.entity.ModelInputClass;
 import br.com.ninus.rest.api.entity.ModelOutputClass;
-import br.com.ninus.rest.api.entity.dto.modelInputClass.ModelInputClassDetails;
 import br.com.ninus.rest.api.entity.dto.modelOutputClass.ModelOutputClassDetails;
 import br.com.ninus.rest.api.entity.dto.modelOutputClass.ModelOutputClassGPTDetails;
 import br.com.ninus.rest.api.exception.RestNotFoundException;

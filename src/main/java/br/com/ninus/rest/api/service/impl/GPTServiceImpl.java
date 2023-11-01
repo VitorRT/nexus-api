@@ -5,7 +5,6 @@ import br.com.ninus.rest.api.dto.gpt.ChatGPTRequest;
 import br.com.ninus.rest.api.dto.gpt.ChatGPTResponse;
 import br.com.ninus.rest.api.entity.ModelInputClass;
 import br.com.ninus.rest.api.entity.ModelOutputClass;
-import br.com.ninus.rest.api.entity.dto.modelInputClass.ModelInputClassDetails;
 import br.com.ninus.rest.api.entity.dto.modelOutputClass.ModelOutputClassGPTDetails;
 import br.com.ninus.rest.api.exception.IllegalRequestException;
 import br.com.ninus.rest.api.service.IGPTService;

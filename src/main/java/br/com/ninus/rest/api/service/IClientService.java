@@ -1,6 +1,5 @@
 package br.com.ninus.rest.api.service;
 
-import br.com.ninus.rest.api.entity.Client;
 import br.com.ninus.rest.api.entity.dto.client.ClientPostRequest;
 import br.com.ninus.rest.api.entity.dto.client.ClientDetails;
 import org.springframework.data.domain.Pageable;

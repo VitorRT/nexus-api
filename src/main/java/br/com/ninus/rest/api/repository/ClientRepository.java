@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Page<Client> findAllByActiveTrue(Pageable pageable);
@@ -44,4 +45,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
                     "classNinus.categorie = 'FINISHED'"
     )
     List<FeedClassesResponse> getFeedClassesFineshedByClientId(@Param(value = "clientId") Long id);
+
+    @Query("SELECT c FROM Client c WHERE c.email = :email")
+    Optional<Client> getClientByEmail(@Param("email") String email);
 }

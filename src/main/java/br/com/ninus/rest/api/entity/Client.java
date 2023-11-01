@@ -3,18 +3,21 @@ package br.com.ninus.rest.api.entity;
 import br.com.ninus.rest.api.entity.dto.client.ClientPostRequest;
 import br.com.ninus.rest.api.utils.constants.SchoolType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "client")
 @Data
-public class Client {
+public class Client implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -68,6 +71,43 @@ public class Client {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.active = true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(
+            new SimpleGrantedAuthority("ROLE_USER")
+        );
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
 }

@@ -1,7 +1,6 @@
 package br.com.ninus.rest.api.service;
 
 import br.com.ninus.rest.api.entity.ModelInputClass;
-import br.com.ninus.rest.api.entity.dto.modelInputClass.ModelInputClassDetails;
 import br.com.ninus.rest.api.entity.dto.modelOutputClass.ModelOutputClassDetails;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
