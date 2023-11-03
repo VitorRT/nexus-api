@@ -1,15 +1,29 @@
-FROM maven:3.8.3-openjdk-17-slim
+# Criando a partir de uma imagem do ubuntu (versão mais recente)
+FROM ubuntu:latest AS build
 
-ENV PROJECT_HOME /usr/src/ninus-api
-ENV JAR_NAME rest.api-0.0.1-SNAPSHOT.jar
+# Atualizando os pacoted o meu linux
+RUN apt-get update
 
-RUN mkdir -p ${PROJECT_HOME}
-WORKDIR ${PROJECT_HOME}
+# Instalando o JDK 17 no meu linux
+RUN apt-get install openjdk-17-jdk -y
 
+# Copiando o meu projeto para o container
 COPY . .
 
-RUN mvn clean package -DskipTests
+# Instalando o Maven
+RUN apt-get install maven -y
 
-RUN mv ${PROJECT_HOME}/target/${JAR_HOME} ${PROJECT_HOME}/
+# Gerando um .jar do meu app
+RUN mvn clean package
 
-ENTRYPOINT ["java", "-jar", "${JAR_NAME}"]
+# Criando a partir de uma imagem do java 17
+FROM openjdk:17-jdk-slim
+
+# Expondo a porta 8080 para uso
+EXPOSE 8080
+
+# Copiando o meu jar gerado pelo maven para o container ja o renomeando para "app.jar"
+COPY --from=build /target/rest.api-0.0.1-SNAPSHOT.jar app.jar
+
+# Executando o jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
